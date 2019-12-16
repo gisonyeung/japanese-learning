@@ -1,0 +1,37 @@
+{
+  "name": "japanese-learning",
+  "version": "0.0.1",
+  "description": "日语学习程序",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gisonyeung/japanese-learning.git"
+  },
+  "author": "gisonyeung <gisonyeung@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gisonyeung/japanese-learning/issues"
+  },
+  "homepage": "https://github.com/gisonyeung/japanese-learning#readme",
+  "dependencies": {
+    "debug": "~2.6.8",
+    "ejs": "~2.5.5",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.0.0",
+    "koa-onerror": "^3.1.0",
+    "koa-router": "^7.2.1",
+    "koa-static": "^3.0.0",
+    "koa-views": "^6.0.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.7.2",
+    "eslint-plugin-react": "^7.17.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  // 统一使用 \n 换行符
+  "files.eol": "\n",
+  "editor.tabSize": 2,
+  // 保存时自动格式化
+  "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+  // ESLint 配置
+  "eslint.validate": [
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autoFix": true
+    }
+  ],
+}
