@@ -1,36 +1,43 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Layout, Menu, Button, message, Tooltip } from 'antd'
-const { Header, Content } = Layout
+import { Route, Link, Switch } from 'react-router-dom'
+import { Layout, Menu, Icon, Button, message, Tooltip } from 'antd'
+const { Sider, Content } = Layout
+
+import Home from './Home'
+import TranningPhonogram from './TranningPhonogram'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
   }
 
-  static propTypes = {
-    children: PropTypes.any
-  }
-
   render() {
     return (
-      <div>
-        <Layout>
-          <Header style={{ backgroundColor: '#fff' }}>
-            <div className="header-logo" />
-            <Menu
-              theme="light"
-              mode="horizontal"
-              defaultSelectedKeys={['2']}
-              style={{ lineHeight: '64px' }}
-            >
-              <Menu.Item key="1">nav 1</Menu.Item>
-              <Menu.Item key="2">nav 2</Menu.Item>
-              <Menu.Item key="3">nav 3</Menu.Item>
-            </Menu>
-          </Header>
-          <Content>{this.props.children}</Content>
-        </Layout>
+      <div className="wrapper">
+        <div className="line-wrapper">
+          <div className="line line-top"></div>
+          <div className="line line-right"></div>
+          <div className="line line-bottom"></div>
+          <div className="line line-left"></div>
+        </div>
+        <div className="brand-wrapper">
+          <div className="brand-logo"></div>
+          <font className="brand-desc">石のうえ<br />にも三年</font>
+        </div>
+        <div className="toggle-menu">
+          <span className="open"></span>
+          <span className="close"></span>
+        </div>
+        <div className="content">
+          <Switch>
+            <Route path="/phonogram">
+              <TranningPhonogram />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
       </div>
     )
   }

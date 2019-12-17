@@ -1,0 +1,122 @@
+.selector {
+  @overflow-length: 10px;
+  @item-size: 45px;
+
+  display: flex;
+  margin: 30px 0;
+  flex-direction: column;
+
+  &-row {
+    display: flex;
+    flex-direction: row;
+
+    &:first-child {
+      .selector-item {
+        &:after {
+          content: '';
+          position: absolute;
+          width: @item-size + 1;
+          height: @overflow-length;
+          left: -1px;
+          top: -@overflow-length;
+          border-left: 1px solid @primary-color;
+          border-right: 1px solid @primary-color;
+        }
+
+        &:last-child {
+          &:after {
+            width: @item-size;
+          }
+        }
+
+        &-select {
+          border-top: 1px solid @primary-color;
+        }
+      }
+    }
+
+    &:last-child {
+      .selector-item {
+        border-bottom: 1px solid @primary-color;
+
+        &:before {
+          height: @item-size;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          width: @item-size + 1;
+          height: @overflow-length;
+          left: -1px;
+          bottom: -@overflow-length;
+          border-left: 1px solid @primary-color;
+          border-right: 1px solid @primary-color;
+        }
+
+        &:last-child {
+          &:after {
+            width: @item-size;
+          }
+        }
+      }
+    }
+  }
+
+  &-item {
+    position: relative;
+    width: @item-size;
+    height: @item-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: @primary-color;
+    border-left: 1px solid @primary-color;
+    border-top: 1px solid @primary-color;
+    cursor: pointer;
+
+    &-select {
+      background-color: @primary-color;
+      color: #fff;
+      border-left: 1px solid #fff;
+      border-top: 1px solid #fff;
+    }
+
+    &:last-child {
+      border-right: 1px solid @primary-color;
+    }
+
+    &:first-child {
+      &-select {
+        border-top: 1px solid @primary-color;
+      }
+      
+      &:before {
+        content: '';
+        position: absolute;
+        height: @item-size + 1;
+        width: @overflow-length;
+        left: -@overflow-length;
+        top: -1px;
+        border-top: 1px solid @primary-color;
+        border-bottom: 1px solid @primary-color;
+      }
+    }
+
+    &:last-child {
+      &:before {
+        content: '';
+        position: absolute;
+        height: @item-size + 1;
+        width: @overflow-length;
+        right: -@overflow-length;
+        top: -1px;
+        border-top: 1px solid @primary-color;
+        border-bottom: 1px solid @primary-color;
+      }
+    }
+
+  }
+}

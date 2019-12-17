@@ -48,7 +48,11 @@ module.exports = {
         test: /\.less$/i, use: ['style-loader', 'css-loader', {
           loader: 'less-loader',
           options: {
-            javascriptEnabled: true
+            javascriptEnabled: true,
+            modifyVars: {
+              'primary-color': '#dfac02',
+              'link-color': '#dfac02',
+            }
           }
         }]
       },

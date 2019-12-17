@@ -1,9 +1,307 @@
+// @import '~antd/dist/antd.less';
 @import './theme.less';
 
-.header-logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(0, 0, 0, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
+* {
+  font-family: "Noto Sans JP", "Yu Gothic", "游ゴシック", "YuGothic", "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.line {
+  &-wrapper {
+    
+
+    .line {
+      position: absolute;
+      background-color: @primary-color;
+    }
+  }
+
+  &-top {
+    top: 20px;
+    width: 100vw;
+    height: 1px;
+  }
+
+  &-bottom {
+    bottom: 20px;
+    width: 100vw;
+    height: 1px;
+  }
+
+  &-left {
+    left: 20px;
+    height: 100vh;
+    width: 1px;
+  }
+
+  &-right {
+    right: 20px;
+    height: 100vh;
+    width: 1px;
+  }
+}
+
+.brand {
+  &-wrapper {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-logo {
+    background-image: url('/assets/images/mario.ico');
+    background-size: 40px, 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  &-desc {
+    margin-top: 3px;
+    font-size: 12px;
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+.sidebar {
+  display: flex;
+  width: 64px;
+  flex-direction: column;
+  border-right: 1px solid #e8e8e8;
+}
+
+.s {
+  &-logo-wrapper {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-logo {
+    background-image: url('/assets/images/mario.ico');
+    background-size: 30px, 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  &-icon-wrapper {
+    margin-top: 50px;
+  }
+
+  &-menu {
+    margin-left: -1px;
+    border-right: none;
+  }
+}
+
+.content {
+  flex: 1
+}
+
+.main-content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home {
+  &-info-wrapper {
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-btn {
+    position: relative;
+    margin-top: 10px;
+    height: 44px;
+    padding: 15px 0 15px 50px;
+    font-size: 16px;
+    width: 295px;
+    background-color: @primary-color;
+    color: #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 20px;
+      width: 20px;
+      height: 100%;
+      background: url(/assets/images/icn-arr-right-white.svg) 0 center no-repeat;
+      background-size: contain;
+    }
+
+    .prefix-icon {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      display: flex;
+      width: 34px;
+      height: 34px;
+      border-radius: 28px;
+      font-size: 33px;
+      font-weight: bolder;
+      overflow: hidden;
+      background-color: #fff;
+      color: @primary-color;
+      text-align: center;
+
+      font {
+        margin-top: -8px;
+      }
+    }
+  }
+
+  &-title {
+    font-size: 24px;
+  }
+
+  &-sub-title {
+    font-size: 12px;
+  }
+
+  &-logo {
+    @logoSize: 120px;
+    margin-bottom: 30px;
+    width: @logoSize;
+    height: @logoSize;
+    background-image: url('/assets/images/mario.ico');
+    background-size: @logoSize, @logoSize;
+  }
+
+  &-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-select {
+    &-wrapper {
+
+    }
+
+    &-btn {
+      margin-top: 10px;
+      border-radius: 50px;
+      height: 50px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.toggle-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 99;
+  cursor: pointer;
+
+  span {
+    &:before, &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      margin: auto;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    &.open {
+      width: 85px;
+      height: 85px;
+      background: @primary-color;
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      &:before {
+        height: 22px;
+        width: 28px;
+        border-top: solid 1px white;
+        border-bottom: solid 1px white;
+      }
+
+      &:after {
+        border-top: solid 1px white;
+        width: 28px;
+        height: 1px;
+      }
+    }
+
+    &.close {
+      background: white;
+      opacity: 0;
+      width: 85px;
+      height: 85px;
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      -webkit-transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+      transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      &:before {
+        transform: rotate(45deg);
+        background: @primary-color;
+        width: 28px;
+        height: 1px;
+      }
+
+      &:after {
+        transform: rotate(-45deg);
+        background: @primary-color;
+        width: 28px;
+        height: 1px;
+      }
+    }
+  }
+}
+
+.learning-steps {
+  position: fixed;
+  left: 45px;
+  top: 200px;
+}
+
+.panel {
+  
+  .title {
+    font-size: 18px;
+  }
+  
+
+  &-wrapper {
+
+  }
 }
