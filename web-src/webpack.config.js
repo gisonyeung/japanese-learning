@@ -17,6 +17,7 @@ module.exports = {
   resolve: {
     extensions: ['.jsx', '.js', '.json'],
     alias: {
+      '@constants': path.resolve(__dirname, 'constants'),
       '@containers': path.resolve(__dirname, 'containers'),
       '@components': path.resolve(__dirname, 'components'),
       '@util': path.resolve(__dirname, 'util'),

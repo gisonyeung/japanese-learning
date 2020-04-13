@@ -1,0 +1,32 @@
+.btn {
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid @primary-color;
+  color: @primary-color;
+  outline: none;
+  cursor: pointer;
+  height: 40px;
+  width: 150px;
+  font-size: 14px;
+
+  &-primary {
+    background-color: @primary-color;
+    color: #fff;
+  }
+
+  &-arrow {
+    position: relative;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 10px;
+      width: 20px;
+      height: 100%;
+      background: url(/assets/images/icn-arr-right-white.svg) 0 center no-repeat;
+      background-size: contain;
+    }
+  }
+}

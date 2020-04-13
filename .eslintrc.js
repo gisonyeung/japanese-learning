@@ -7,7 +7,8 @@ module.exports = {
     'extends': [
         // 'eslint:recommended',
         'plugin:react/recommended',
-        'plugin:css-modules/recommended',
+        // 'plugin:prettier/recommended',
+        // 'plugin:css-modules/recommended',
     ],
     'globals': {
         'Atomics': 'readonly',
@@ -27,7 +28,7 @@ module.exports = {
     },
     'plugins': [
         'react',
-        'css-modules'
+        // 'css-modules'
     ],
     'rules': {
         "react/jsx-uses-react": "error",

@@ -295,13 +295,33 @@
 }
 
 .panel {
-  
-  .title {
-    font-size: 18px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   &-wrapper {
 
   }
+  
+  .title {
+    font-size: 18px;
+  }
+
+  .desc {
+    text-align: center;
+    font-size: 14px;
+
+
+    font {
+      color: @primary-color;
+      font-weight: bold;
+      margin: 0 5px;
+    }
+  }
+
+  .btn-wrapper {
+    margin-top: 30px;
+  }
+  
 }

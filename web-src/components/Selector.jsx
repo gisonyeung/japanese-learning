@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import '@style/selector.less'
 
@@ -11,136 +12,100 @@ class Selector extends React.Component {
     super(props)
   }
 
+  static propTypes = {
+    dataSet: PropTypes.array,
+    onChange: PropTypes.func,
+  }
+
   state = {
-    dataSet: [
-      [
-        "あ",
-        "い",
-        "う",
-        "え",
-        "お"
-      ],
-      [
-        "か",
-        "き",
-        "く",
-        "け",
-        "こ"
-      ],
-      [
-        "さ",
-        "し",
-        "す",
-        "せ",
-        "そ"
-      ],
-      [
-        "た",
-        "ち",
-        "つ",
-        "て",
-        "と"
-      ],
-      [
-        "な",
-        "に",
-        "ぬ",
-        "ね",
-        "の"
-      ],
-      [
-        "は",
-        "ひ",
-        "ふ",
-        "へ",
-        "ほ"
-      ],
-      [
-        "ま",
-        "み",
-        "む",
-        "め",
-        "も"
-      ],
-      [
-        "や",
-        "(い)",
-        "ゆ",
-        "(え)",
-        "よ"
-      ],
-      [
-        "ら",
-        "り",
-        "る",
-        "れ",
-        "ろ"
-      ],
-      [
-        "わ",
-        "(い)",
-        "(う)",
-        "(え)",
-        "を"
-      ]
-    ],
     startIndex: [],
     endIndex: []
   }
 
+  reset = () => {
+    this.setState({
+      startIndex: [],
+      endIndex: []
+    })
+  }
+
   onClick = (data) => {
     return (e) => {
-      if (!this.state.startIndex.length) { // 选择起始点
-        this.setState({
-          startIndex: data
-        })
-      } else if (!this.state.endIndex.length) { // 选择结束点
-        let startSumIndex = calSumIndex(this.state.startIndex)
+      let mutation = {
+        startIndex: this.state.startIndex,
+        endIndex: this.state.endIndex,
+      }
+
+      if (!mutation.startIndex.length) { // 选择起始点
+        mutation.startIndex = data
+      } else if (!mutation.endIndex.length) { // 选择结束点
+        let startSumIndex = calSumIndex(mutation.startIndex)
         let endSumIndex = calSumIndex(data)
 
         if (endSumIndex < startSumIndex) {
-          this.setState({
+          mutation = {
             startIndex: data,
-            endIndex: this.state.startIndex
-          })
+            endIndex: mutation.startIndex
+          }
         } else {
-          this.setState({
-            endIndex: data
-          })
+          mutation.endIndex = data
         }
 
-      } else if (data.join('') === this.state.startIndex.join('') && data.join('') === this.state.endIndex.join('')) { // 取消选择起始点
-        this.setState({
+      } else if (data.toString() === mutation.startIndex.toString() && data.toString() === mutation.endIndex.toString()) { // 取消选择起始点
+        mutation = {
           startIndex: [],
           endIndex: [],
-        })
+        }
       } else {
-        let startSumIndex = calSumIndex(this.state.startIndex)
-        let endSumIndex = calSumIndex(this.state.endIndex)
+        let startSumIndex = calSumIndex(mutation.startIndex)
+        let endSumIndex = calSumIndex(mutation.endIndex)
         let currentSumIndex = calSumIndex(data)
 
         if (currentSumIndex < startSumIndex) {
-          this.setState({
-            startIndex: data
-          })
+          mutation.startIndex = data
         } else {
-          this.setState({
-            endIndex: data
-          })
+          mutation.endIndex = data
         }
       }
+
+      this.setState(mutation)
+
+      // 收集选中列表
+      this.collectSelected(mutation)
     }
   }
 
-  isBetween = (currentIndex) => {
-    if (!this.state.startIndex.length) return false;
+  collectSelected = (mutation) => {
+    let res = []
 
-    if (!this.state.endIndex.length) {
-      return currentIndex.join('') === this.state.startIndex.join('')
+    this.props.dataSet.forEach((row, rowIndex) => {
+      row.forEach((val, colIndex) => {
+        if (this.isBetween([rowIndex, colIndex], mutation)) {
+          res.push([rowIndex, colIndex])
+        }
+      })
+    })
+
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(res)
     }
 
-    let _startSumIndex = calSumIndex(this.state.startIndex)
-    let _endSumIndex = calSumIndex(this.state.endIndex)
+  }
+
+  isBetween = (currentIndex, mutation) => {
+    let obj = mutation || this.state
+
+    obj.startIndex = obj.startIndex || []
+    obj.endIndex = obj.endIndex || []
+
+    if (!obj.startIndex.length) return false
+
+    if (!obj.endIndex.length) {
+      return currentIndex.toString() === obj.startIndex.toString()
+    }
+
+    let _startSumIndex = calSumIndex(obj.startIndex)
+    let _endSumIndex = calSumIndex(obj.endIndex)
 
     let minIndex = Math.min(_startSumIndex, _endSumIndex)
     let maxIndex = Math.max(_startSumIndex, _endSumIndex)
@@ -153,7 +118,7 @@ class Selector extends React.Component {
     return (
       <div className="selector">
         {
-          this.state.dataSet.map((row, rowIndex) => {
+          this.props.dataSet.map((row, rowIndex) => {
             return (
               <div key={rowIndex} className="selector-row">
                 {
